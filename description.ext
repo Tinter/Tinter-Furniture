@@ -1,0 +1,4 @@
+class CfgSounds {
+	sounds[] = {};
+  #include "dogs\sounds.hpp"
+};
