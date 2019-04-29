@@ -5,17 +5,17 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=9;
+	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=361;
+		nextID=561;
 	};
 	class Camera
 	{
-		pos[]={6216.9316,136.8403,8775.6914};
-		dir[]={-0.21738434,-0.51164728,0.83138615};
-		up[]={-0.1294352,0.85919046,0.49502319};
-		aside[]={0.96757078,2.0768493e-007,0.25299492};
+		pos[]={8205.7549,50.692318,3176.491};
+		dir[]={-0.58092839,-0.5882163,-0.5628258};
+		up[]={-0.4224565,0.80870557,-0.40929434};
+		aside[]={-0.69590396,-3.3155084e-006,0.71827561};
 	};
 };
 binarizationWanted=0;
@@ -65,15 +65,13 @@ addons[]=
 	"A3_Weapons_F_Exp_SMGs_SMG_05",
 	"A3_Structures_F_Argo_Military_Fortifications",
 	"A3_Soft_F_Exp_Offroad_02",
-	"A3_Soft_F_Exp_LSV_01",
-	"A3_Structures_F_Households_Stone_Shed",
-	"A3_Structures_F_Argo_Civilian_Stone_Shed_01"
+	"A3_Soft_F_Exp_LSV_01"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=28;
+		items=27;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -263,13 +261,6 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item27
-		{
-			className="A3_Structures_F_Households";
-			name="Arma 3 - Houses";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
 	};
 };
 randomSeed=6497756;
@@ -331,7 +322,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=69;
+		items=60;
 		class Item0
 		{
 			dataType="Group";
@@ -2771,145 +2762,6 @@ class Mission
 			};
 			id=180;
 			type="B_T_LSV_01_unarmed_F";
-		};
-		class Item60
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={6211,119.79636,8799};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-			};
-			id=352;
-			type="Land_i_Stone_Shed_V3_F";
-			atlOffset=7.6293945e-006;
-		};
-		class Item61
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={6211,119.79636,8799};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-			};
-			id=353;
-			type="Land_i_Stone_Shed_V1_F";
-			atlOffset=7.6293945e-006;
-		};
-		class Item62
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={6211,119.79636,8799};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-			};
-			id=354;
-			type="Land_i_Stone_Shed_V2_F";
-			atlOffset=7.6293945e-006;
-		};
-		class Item63
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={6188,120.99557,8800};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-			};
-			id=355;
-			type="Land_i_Stone_Shed_01_b_clay_F";
-		};
-		class Item64
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={6188,120.99557,8800};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-			};
-			id=356;
-			type="Land_i_Stone_Shed_01_b_raw_F";
-		};
-		class Item65
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={6188,120.99557,8800};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-			};
-			id=357;
-			type="Land_i_Stone_Shed_01_b_white_F";
-		};
-		class Item66
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={6188,120.99557,8800};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-			};
-			id=358;
-			type="Land_i_Stone_Shed_01_c_clay_F";
-		};
-		class Item67
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={6188,120.99557,8800};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-			};
-			id=359;
-			type="Land_i_Stone_Shed_01_c_raw_F";
-		};
-		class Item68
-		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={6188,120.90557,8800};
-			};
-			side="Empty";
-			flags=5;
-			class Attributes
-			{
-			};
-			id=360;
-			type="Land_i_Stone_Shed_01_c_white_F";
-			atlOffset=-0.089996338;
 		};
 	};
 };

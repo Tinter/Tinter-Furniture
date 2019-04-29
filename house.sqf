@@ -96,14 +96,13 @@ tint_fnc_dressDown = {
   deleteVehicle _sphere;
   _house setVariable ["tint_houseobject", nil];
   _house setVariable ["tint_house_objects", nil];
-  _house getVariable ["tint_house_ready", true];
+  _house setVariable ["tint_house_ready", true];
 };
 
 tint_fnc_dressUp = {
   params["_house"];
   private _objects = [];
-  
-  if (!isNull (_house getVariable ["tint_houseobject", objNull])) exitWith {};
+  private _lootSpots = [];
 
   private _obj = "Sign_Sphere200cm_F" createVehicleLocal [0,0,0];
   _obj setPos (_house modelToWorld [0,0,12]);
@@ -127,7 +126,7 @@ tint_fnc_dressUp = {
       _index = (round((((getPos _house)#1) * 10) % _index) - 1) max 0;
     };
     //IMPORTANT, ARRAY IS A REFERENCE TYPE AAAAAAAAA
-    _composition = +_compositions#_index;
+    _composition = +(_compositions#_index);
     
     
     //Workaround for the stupid yellow shop house
@@ -137,25 +136,33 @@ tint_fnc_dressUp = {
       } foreach _composition
     };
     
-    {
-      _x params ["_type", "_relPos", "_relDir", "_relUp"];
-      private _obj = _type createVehicleLocal [0,0,0];
-      
-      _absDir = _house vectorModelToWorld _relDir;
-      _absUp = _house vectorModelToWorld _relUp;
-      _obj setVectorDirAndUp [_absDir, _absUp];
-      _x set [2, _absDir];
-      _x set [3, _absUp];
-      
-      _absPos = _house modelToWorld _relPos;
-      _obj setPosATL _absPos;
-      _x set [1, _absPos];
-      
-      _obj enableSimulation false;
-      _objects append [_obj];
-    } forEach _composition;
+    
+    for [{ private _i = count _composition - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
+      _cur = _composition#_i;
+      _cur params ["_type", "_relPos", "_relDir", "_relUp"];
+      if (_type == "Sign_Arrow_Direction_Cyan_F") then {
+        _lootSpots append [[_house modelToWorld _relPos, _house vectorModelToWorld _relDir, _house vectorModelToWorld _relUp]];
+        _composition deleteAt _i;
+      } else {
+        private _obj = _type createVehicleLocal [0,0,0];
+        
+        _absDir = _house vectorModelToWorld _relDir;
+        _absUp = _house vectorModelToWorld _relUp;
+        _obj setVectorDirAndUp [_absDir, _absUp];
+        _cur set [2, _absDir];
+        _cur set [3, _absUp];
+        
+        _absPos = _house modelToWorld _relPos;
+        _obj setPosATL _absPos;
+        _cur set [1, _absPos];
+        
+        _obj enableSimulation false;
+        _objects append [_obj];
+      };
+    };
  
     _house setVariable ["tint_house_composition", _composition];
+    _house setVariable ["tint_house_lootSpots", _lootSpots];
     
     //TODO: Send out composition to the network
     
@@ -170,15 +177,28 @@ tint_fnc_dressUp = {
     } forEach _composition;
   };
   
+  //Test loot code
+  _spots = _house getVariable ["tint_house_lootSpots", []];
+  if (count _spots > 0) then {
+    _spot = selectRandom _spots;
+    _loot = selectRandomWeighted ["ACE_fieldDressing", 2, "ACE_epinephrine", 0.5, "ACE_Flashlight_XL50", 0.2, "ACE_morphine", 1, "ACE_bloodIV_250", 0.1, "ACE_30Rnd_556x45_Stanag_Mk262_mag", 1, "10Rnd_9x21_Mag", 2, "HandGrenade", 0.5];
+    _holder = "GroundWeaponHolder" createVehicle [0,0,0];
+    _holder setVectorDirAndUp [_spot#1, _spot#2];
+    _holder setPosATL _spot#0;
+    _holder addItemCargoGlobal [_loot, 1];
+    _holder addMagazineCargoGlobal [_loot, 1];
+    _objects append [_holder];
+  };
+  
   _house addEventHandler ["killed", {params ["_house"];[_house] call tint_fnc_dressDown;}];
   _house setVariable ["tint_house_objects", _objects];
-  _house getVariable ["tint_house_ready", false];
+  _house setVariable ["tint_house_ready", false];
 };
 
 tint_houses = true;
 while {tint_houses} do {
   private "_index";
-  _buildings = player nearObjects ["House", RANGE];
+  _buildings = player nearObjects ["House_F", RANGE];
   
   //Remove all buildings not a child of the chosen classes
   {
@@ -191,7 +211,7 @@ while {tint_houses} do {
   } forEach _buildings;
   
   //Inverse loop through the houses, because we need to remove some
-  for [{ _i = count tint_activeHouses - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
+  for [{ private _i = count tint_activeHouses - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
     private _house = tint_activeHouses#_i;
     if ((player distance _house) > RANGE) then {
       [_house] call tint_fnc_dressDown; 
