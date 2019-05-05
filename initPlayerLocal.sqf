@@ -1,1 +1,1 @@
-execVM "house.sqf";
+execVM "furniture\init.sqf";

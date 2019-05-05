@@ -1,0 +1,78 @@
+params["_house"];
+private _objects = [];
+private _lootSpots = [];
+
+//Blacklist check
+if (_house getVariable ["tint_house_dressed", false] || {_house getVariable ["tint_house_blacklisted", false]}) exitWith {};
+_house setVariable ["tint_house_dressed", true];
+
+// private _obj = "Sign_Sphere200cm_F" createVehicleLocal [0,0,0];
+// _obj setPos (_house modelToWorld [0,0,12]);
+// _house setVariable ["tint_houseobject", _obj];
+
+_isInitialized = _house getVariable ["tint_house_initialized", false];
+
+if (_isInitialized) then {
+  _composition = _house getVariable "tint_house_composition";
+  {
+    _x params ["_type", "_pos", "_dir", "_up"];
+    private _obj = _type createVehicleLocal [0,0,0];
+    _obj setVectorDirAndUp [_dir, _up];
+    _obj setPosATL _pos;
+    _obj enableSimulation false;
+    _objects append [_obj];
+  } forEach _composition;
+} else {
+  // _obj setObjectTexture [0, "#(argb,8,8,3)color(1,0.1,0.1,1.0,ca)"];
+  _class = [_house getVariable "tint_house_class"] call tint_fnc_translate;
+  _compositions = tint_compNamespace getVariable [_class, [[]]];
+  
+  _index = count _compositions;
+  if (_index == 1) then {
+    _index = 0;
+  } else {
+    _index = (round((((getPos _house)#1) * 10) % _index) - 1) max 0;
+  };
+  //IMPORTANT, ARRAY IS A REFERENCE TYPE AAAAAAAAA
+  _composition = +(_compositions#_index);
+  
+  //Workaround for the stupid yellow shop house
+  if (typeOf _house == "Land_i_Shop_01_V2_F") then {
+    {
+      _x#1 set [1, (_x#1#1)-0.34];
+    } foreach _composition
+  };
+  
+  for [{ private _i = count _composition - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
+    _cur = _composition#_i;
+    _cur params ["_type", "_relPos", "_relDir", "_relUp"];
+    if (_type == "Sign_Arrow_Direction_Cyan_F") then {
+      _lootSpots append [[_house modelToWorld _relPos, _house vectorModelToWorld _relDir, _house vectorModelToWorld _relUp]];
+      _composition deleteAt _i;
+    } else {
+      private _obj = _type createVehicleLocal [0,0,0];
+      
+      _absDir = _house vectorModelToWorld _relDir;
+      _absUp = _house vectorModelToWorld _relUp;
+      _obj setVectorDirAndUp [_absDir, _absUp];
+      _cur set [2, _absDir];
+      _cur set [3, _absUp];
+      
+      _absPos = _house modelToWorld _relPos;
+      _obj setPosATL _absPos;
+      _cur set [1, _absPos];
+      
+      _obj enableSimulation false;
+      _objects append [_obj];
+    };
+  };
+  
+  //Send out calculations to other computers
+  [_house, _composition, _lootSpots] remoteExecCall ["tint_fnc_updateHouse", 0];
+};
+
+
+_house addEventHandler ["killed", {params ["_house"];[_house] call tint_fnc_dressDown;}];
+_house setVariable ["tint_house_objects", _objects];
+
+[_house] call tint_fnc_spawnLoot;
