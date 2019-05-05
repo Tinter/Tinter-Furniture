@@ -1,5 +1,6 @@
 # Tinter-Furniture
 Script to return the furniture from space
+Requires CBA.
 
 Created by: Tinter
 Scripting help by: Diwako, G4rrus
