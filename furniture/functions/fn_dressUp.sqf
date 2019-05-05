@@ -69,7 +69,8 @@ if (_house getVariable ["tint_house_initialized", false]) then {
 };
 
 
-_house addEventHandler ["killed", {params ["_house"];[_house] call tint_fnc_dressDown;}];
+private _eh = _house addEventHandler ["killed", {params ["_house"];[_house] call tint_fnc_dressDown;}];
+_house setVariable ["tint_house_killedEH", _eh];
 _house setVariable ["tint_house_objects", _objects];
 
 [_house] call tint_fnc_spawnLoot;

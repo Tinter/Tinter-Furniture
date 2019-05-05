@@ -1,1 +1,0 @@
-execVM "furniture\init.sqf";
