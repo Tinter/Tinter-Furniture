@@ -6,5 +6,6 @@ class tint {
     class spawnLoot {};
     class translate {};
     class updateHouse {};
+    class init {postInit=1;};
   };
 };

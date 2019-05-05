@@ -1,4 +1,7 @@
-#define RANGE 50
+#define RANGE 100
+
+// no HC or dedicated server allowed
+if !(hasInterface) exitWith {};
 
 call compile preprocessFileLineNumbers "furniture\import.sqf";
 
@@ -73,39 +76,49 @@ tint_translationNamespace setVariable ["Land_i_Stone_HouseBig_V1_F", "i_Stone_Ho
 // tint_translationNamespace setVariable ["Land_i_Stone_Shed_V1_F", "i_Stone_Shed_01_b_base_F"];
 tint_translationNamespace setVariable ["i_Stone_Shed_01_c_base_F", "i_Stone_Shed_01_b_base_F"];
 
-tint_houses = true;
-while {tint_houses} do {
-  private "_index";
-  _buildings = player nearObjects ["House_F", RANGE];
-  
-  //Remove all buildings not a child of the chosen classes
-  {
-    private _building = _x;
-    private _index = _validBuildings findif {_building isKindOf _x};
-    if (_index != -1) then {
-      tint_activeHouses pushBackUnique _building;
-      _building setVariable ["tint_house_class", _validBuildings#_index];
-    };
-  } forEach _buildings;
-  
-  //Inverse loop through the houses, because we need to remove some
-  for [{ private _i = count tint_activeHouses - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
-    private _house = tint_activeHouses#_i;
-    if ((player distance _house) > RANGE) then {
-      if (isMultiplayer) then {
-        //Tell server to delete
-        [_house] remoteExecCall ["tint_fnc_dressDown_server", 0];
+[_validBuildings] spawn {
+  params ["_validBuildings"];
+  tint_houses = true;
+
+  private _player = objNull;
+  private _buildings = [];
+  private _house = objNull;
+  private _activeHouses = tint_activeHouses;
+  private _index = 0;
+  private _i = 0;
+  while {tint_houses} do {
+    _player = [] call CBA_fnc_currentUnit;
+    _buildings = (_player nearObjects ["House_F", RANGE]) select {!(isObjectHidden _x)};
+
+    //Remove all buildings not a child of the chosen classes
+    {
+      _house = _x;
+      _index = _validBuildings findif {_house isKindOf _x};
+      if (_index != -1) then {
+        _activeHouses pushBackUnique _house;
+        _house setVariable ["tint_house_class", _validBuildings#_index];
       };
-      [_house] call tint_fnc_dressDown; 
-      tint_activeHouses deleteAt _i;
-    } else {
-      [_house] call tint_fnc_dressUp;
-      if (isMultiplayer) then {
-        //Spawn on the server to keep ai working
-        [_house] remoteExecCall ["tint_fnc_dressUp_server", 0];
+    } forEach _buildings;
+
+    //Inverse loop through the houses, because we need to remove some
+    for [{ _i = count _activeHouses - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
+      _house = _activeHouses#_i;
+      if ((_player distance _house) > RANGE) then {
+        if (isMultiplayer) then {
+          //Tell server to delete
+          [_house] remoteExecCall ["tint_fnc_dressDown_server", 0];
+        };
+        [_house] call tint_fnc_dressDown;
+        _activeHouses deleteAt _i;
+      } else {
+        [_house] call tint_fnc_dressUp;
+        if (isMultiplayer) then {
+          //Spawn on the server to keep ai working
+          [_house] remoteExecCall ["tint_fnc_dressUp_server", 0];
+        };
       };
     };
-  }; 
-  
-  sleep 10;
+
+    sleep 10;
+  };
 };

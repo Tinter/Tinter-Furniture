@@ -1,8 +1,9 @@
 params["_house"];
 
 if (hasInterface) exitWith {};
-_players = [] call cba_fnc_players;
-_lowestDistance = 69;
+private _players = [] call cba_fnc_players;
+private _lowestDistance = 69;
+private _dist = 0;
 
 {
   _dist = _x distance _house;
@@ -14,7 +15,7 @@ _lowestDistance = 69;
 if (_lowestDistance > 50) exitWith {};
 
 // _sphere = _house getVariable ["tint_houseobject", objNull];
-_objects = _house getVariable ["tint_house_objects", []];
+private _objects = _house getVariable ["tint_house_objects", []];
 {
   deleteVehicle _x;
 }  foreach _objects;
