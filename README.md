@@ -11,7 +11,7 @@ Compositions by: Tinter, jonoPorter, Meanwhile(Nixie)
 
 To use: 
 
-Merge the initPlayerLocal.sqf and description.ext into your mission.
+Merge the description.ext into your mission.
 
 To create compositions:
 
