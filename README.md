@@ -5,7 +5,7 @@ Requires CBA.
 
 Created by: Tinter
 
-Scripting help by: Diwako, G4rrus
+Scripting help by: Diwako, G4rrus, Tennessee
 
 Compositions by: Tinter, jonoPorter, Meanwhile(Nixie)
 
@@ -18,7 +18,7 @@ To create compositions:
 Decorate whichever house you want in Eden. Drag to select them all, then while holding your cursor over the house run ``execVM "furniture/out.sqf"`` in the debug console.
 Arrow(Direction, Cyan), classname "Sign_Arrow_Direction_Cyan_F", indicates position in your composition where loot can spawn.
   Tip: Put ``screenToWorld getMousePosition nearestObject "House_F"`` in the watch field of the debug console to see you're looking at the right building.
-If you're decorating a building that has several variants and is not decorated by this script, you will have to find the classname of the type that all variants inherit from and add it to the _validBuildings array in both the init and out script.
+If you're decorating a building that has several variants and is not decorated by this script, you will have to find the classname of the type that all variants inherit from and add it to the _validBuildings array in buildings.hpp. If it is compatible (Double check for slight offsets or the like), but does not inherit, you can instead add it to the translation layer in buildings.hpp.
 You can use the in script to put a loadout on a house in eden. To use, put the array into the in script, hold over the house you want to apply it to and run ``execVM "furniture/in.sqf"`` in the debug console.
 Beware that the orientation can reset when you manipulate objects imported like this.
 
