@@ -10,10 +10,7 @@ _house setVariable ["tint_house_dressed", true];
 // _obj setPos (_house modelToWorld [0,0,12]);
 // _house setVariable ["tint_houseobject", _obj];
 
-_isInitialized = _house getVariable ["tint_house_initialized", false];
-
-if (_isInitialized) then {
-  _composition = _house getVariable "tint_house_composition";
+if (_house getVariable ["tint_house_initialized", false]) then {
   {
     _x params ["_type", "_pos", "_dir", "_up"];
     private _obj = _type createVehicleLocal [0,0,0];
@@ -21,20 +18,20 @@ if (_isInitialized) then {
     _obj setPosATL _pos;
     _obj enableSimulation false;
     _objects append [_obj];
-  } forEach _composition;
+  } forEach (_house getVariable "tint_house_composition");
 } else {
   // _obj setObjectTexture [0, "#(argb,8,8,3)color(1,0.1,0.1,1.0,ca)"];
-  _class = [_house getVariable "tint_house_class"] call tint_fnc_translate;
-  _compositions = tint_compNamespace getVariable [_class, [[]]];
+  private _class = [_house getVariable "tint_house_class"] call tint_fnc_translate;
+  private _compositions = tint_compNamespace getVariable [_class, [[]]];
   
-  _index = count _compositions;
+  private _index = count _compositions;
   if (_index == 1) then {
     _index = 0;
   } else {
     _index = (round((((getPos _house)#1) * 10) % _index) - 1) max 0;
   };
   //IMPORTANT, ARRAY IS A REFERENCE TYPE AAAAAAAAA
-  _composition = +(_compositions#_index);
+  private _composition = +(_compositions#_index);
   
   //Workaround for the stupid yellow shop house
   if (typeOf _house == "Land_i_Shop_01_V2_F") then {
