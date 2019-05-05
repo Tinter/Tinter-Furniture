@@ -86,7 +86,7 @@ if (!(_newClass == "")) then {
   _cur append [_house worldToModel getPosATL _x];
   _cur append  ([_x, _house] call BIS_fnc_vectorDirAndUpRelative);
 } foreach _objects;
-copyToClipboard format ["_compositions = tint_compNamespace getVariable [""%1"", []];
+copyToClipboard str formatText ["_compositions = tint_compNamespace getVariable [""%1"", []];
 _compositions append [%2];
 tint_compNamespace setVariable [""%1"", _compositions];
 
