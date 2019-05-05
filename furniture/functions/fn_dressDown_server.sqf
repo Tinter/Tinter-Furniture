@@ -1,5 +1,6 @@
 params["_house"];
 
+if (hasInterface) exitWith {};
 _players = [] call cba_fnc_players;
 _lowestDistance = 69;
 
