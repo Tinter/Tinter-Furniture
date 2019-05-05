@@ -1,5 +1,7 @@
 #define RANGE 100
 
+tint_range = RANGE;
+
 // no HC or dedicated server allowed
 if !(hasInterface) exitWith {
   ["tint_dressDownServer", {
