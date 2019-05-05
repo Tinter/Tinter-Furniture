@@ -3,7 +3,7 @@ private _objects = [];
 private _lootSpots = [];
 
 //Blacklist check
-if (_house getVariable ["tint_house_dressed", false] || {_house getVariable ["tint_house_blacklisted", false]}) exitWith {};
+if (_house getVariable ["tint_house_dressed", false] || {_house getVariable ["tint_house_blacklisted", false]} || {!(alive _house)}) exitWith {};
 _house setVariable ["tint_house_dressed", true];
 
 // private _obj = "Sign_Sphere200cm_F" createVehicleLocal [0,0,0];
