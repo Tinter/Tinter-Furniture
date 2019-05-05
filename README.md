@@ -1,15 +1,20 @@
 # Tinter-Furniture
 Script to return the furniture from space
+
 Requires CBA.
 
 Created by: Tinter
+
 Scripting help by: Diwako, G4rrus
+
 Compositions by: Tinter, jonoPorter, Meanwhile(Nixie)
 
 To use: 
+
 Merge the initPlayerLocal.sqf and description.ext into your mission.
 
 To create compositions:
+
 Decorate whichever house you want in Eden. Drag to select them all, then while holding your cursor over the house run ``execVM "furniture/out.sqf"`` in the debug console.
 Arrow(Direction, Cyan), classname "Sign_Arrow_Direction_Cyan_F", indicates position in your composition where loot can spawn.
   Tip: Put ``screenToWorld getMousePosition nearestObject "House_F"`` in the watch field of the debug console to see you're looking at the right building.
@@ -18,5 +23,6 @@ You can use the in script to put a loadout on a house in eden. To use, put the a
 Beware that the orientation can reset when you manipulate objects imported like this.
 
 Composition layout:
+
 Compositions are just files with the output from out.sqf copy pasted inside them, these files are stored in "furniture/compositions".
 Import.sqf will then include these files, both to ensure the file doesn't get too large, but also to ensure commands happen in the right order.
