@@ -1,7 +1,20 @@
 #define RANGE 100
 
+tint_range = RANGE;
+
 // no HC or dedicated server allowed
-if !(hasInterface) exitWith {};
+if !(hasInterface) exitWith {
+  ["tint_dressDownServer", {
+    [{
+      _this call tint_fnc_dressDown_server;
+    }, _this] call CBA_fnc_execNextFrame;
+  }] call CBA_fnc_addEventHandler;
+  ["tint_dressUpServer", {
+    [{
+      _this call tint_fnc_dressUp_server;
+    }, _this] call CBA_fnc_execNextFrame;
+  }] call CBA_fnc_addEventHandler;
+};
 
 call compile preprocessFileLineNumbers "furniture\import.sqf";
 
@@ -106,7 +119,7 @@ tint_translationNamespace setVariable ["i_Stone_Shed_01_c_base_F", "i_Stone_Shed
       if ((_player distance _house) > RANGE) then {
         if (isMultiplayer) then {
           //Tell server to delete
-          [_house] remoteExecCall ["tint_fnc_dressDown_server", 0];
+          ["tint_dressDownServer", [_house]] call CBA_fnc_globalEvent;
         };
         [_house] call tint_fnc_dressDown;
         _activeHouses deleteAt _i;
@@ -114,7 +127,7 @@ tint_translationNamespace setVariable ["i_Stone_Shed_01_c_base_F", "i_Stone_Shed
         [_house] call tint_fnc_dressUp;
         if (isMultiplayer) then {
           //Spawn on the server to keep ai working
-          [_house] remoteExecCall ["tint_fnc_dressUp_server", 0];
+          ["tint_dressUpServer", [_house]] call CBA_fnc_globalEvent;
         };
       };
     };
