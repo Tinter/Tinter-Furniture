@@ -2,6 +2,8 @@
 
 tint_range = RANGE;
 
+call compile preprocessFileLineNumbers "furniture\import.sqf";
+
 // no HC or dedicated server allowed
 if !(hasInterface) exitWith {
   ["tint_dressDownServer", {
@@ -21,8 +23,6 @@ if !(hasInterface) exitWith {
     }, _this] call CBA_fnc_execNextFrame;
   }] call CBA_fnc_addEventHandler;
 };
-
-call compile preprocessFileLineNumbers "furniture\import.sqf";
 
 tint_activeHouses = [];
 
@@ -61,24 +61,27 @@ tint_activeHouses = [];
     for [{ _i = count _activeHouses - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
       _house = _activeHouses#_i;
       if ((_player distance _house) > RANGE) then {
-
-        [_house] call tint_fnc_dressDown;
-        _dressDownServer pushBack _house;
-        _activeHouses deleteAt _i;
+        if (_house getVariable ["tint_house_dressed", false]) then {
+          [_house] call tint_fnc_dressDown;
+          _dressDownServer pushBack _house;
+          _activeHouses deleteAt _i;
+        };
       } else {
-        [_house] call tint_fnc_dressUp;
-        _dressUpServer pushBack _house;
+        if !(_house getVariable ["tint_house_dressed", false]) then {
+          [_house] call tint_fnc_dressUp;
+          _dressUpServer pushBack _house;
+        };
       };
     };
 
     if (isMultiplayer) then {
-      if (count _dressDownServer) then {
+      if (count _dressDownServer > 0) then {
         //Tell server to delete
         ["tint_dressDownServer", [_dressDownServer]] call CBA_fnc_globalEvent;
       };
-      if (count _dressUpServer) then {
-          //Spawn on the server to keep ai working
-          ["tint_dressUpServer", [_dressDownServer]] call CBA_fnc_globalEvent;
+      if (count _dressUpServer > 0) then {
+        //Spawn on the server to keep ai working
+        ["tint_dressUpServer", [_dressDownServer]] call CBA_fnc_globalEvent;
       };
     };
 
