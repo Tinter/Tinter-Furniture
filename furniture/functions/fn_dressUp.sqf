@@ -28,7 +28,8 @@ if (_house getVariable ["tint_house_initialized", false]) then {
   if (_index == 1) then {
     _index = 0;
   } else {
-    _index = (round((((getPos _house)#1) * 10) % _index) - 1) max 0;
+    _pos = getPos _house;
+    _index = (round(((_pos#1+_pos#2) * 10) % _index) - 1) max 0;
   };
   //IMPORTANT, ARRAY IS A REFERENCE TYPE AAAAAAAAA
   private _composition = +(_compositions#_index);
