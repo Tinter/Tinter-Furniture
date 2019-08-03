@@ -13,7 +13,8 @@ _house setVariable ["tint_house_dressed", true];
 if (_house getVariable ["tint_house_initialized", false]) then {
   {
     _x params ["_type", "_pos", "_dir", "_up"];
-    private _obj = _type createVehicleLocal [0,0,0];
+    // private _obj = _type createVehicleLocal [0,0,0];
+    private _obj = createSimpleObject [_type, [0,0,0], true];
     _obj setVectorDirAndUp [_dir, _up];
     _obj setPosATL _pos;
     _obj enableSimulation false;
@@ -48,7 +49,8 @@ if (_house getVariable ["tint_house_initialized", false]) then {
       _lootSpots append [[_house modelToWorld _relPos, _house vectorModelToWorld _relDir, _house vectorModelToWorld _relUp]];
       _composition deleteAt _i;
     } else {
-      private _obj = _type createVehicleLocal [0,0,0];
+      // private _obj = _type createVehicleLocal [0,0,0];
+      private _obj = createSimpleObject [_type, [0,0,0], true];
       
       _absDir = _house vectorModelToWorld _relDir;
       _absUp = _house vectorModelToWorld _relUp;
