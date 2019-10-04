@@ -32,7 +32,7 @@ tint_activeHouses = [];
   params ["_validBuildings"];
   tint_houses = true;
 
-  private _player = objNull;
+  private _pos = [];
   private _buildings = [];
   private _house = objNull;
   private _activeHouses = tint_activeHouses;
@@ -41,8 +41,8 @@ tint_activeHouses = [];
   private _dressUpServer = [];
   private _dressDownServer = [];
   while {tint_houses} do {
-    _player = [] call CBA_fnc_currentUnit;
-    _buildings = (_player nearObjects ["House_F", RANGE]) select {!(isObjectHidden _x) && {!(_x getVariable ["tint_house_blacklisted", false])} && {alive _x}};
+    _pos = positionCameraToWorld [0,0,0];
+    _buildings = (_pos nearObjects ["House_F", RANGE]) select {!(isObjectHidden _x) && {!(_x getVariable ["tint_house_blacklisted", false])} && {alive _x}};
 
     //Remove all buildings not a child of the chosen classes
     {
@@ -60,7 +60,7 @@ tint_activeHouses = [];
     //Inverse loop through the houses, because we need to remove some
     for [{ _i = count _activeHouses - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
       _house = _activeHouses#_i;
-      if ((_player distance _house) > RANGE) then {
+      if ((_pos distance _house) > RANGE) then {
         if (_house getVariable ["tint_house_dressed", false]) then {
           [_house] call tint_fnc_dressDown;
           _dressDownServer pushBack _house;
