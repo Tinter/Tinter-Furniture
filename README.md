@@ -2,7 +2,6 @@
 Script to return the furniture from space.
 Multiplayer compatible, with synchronized furniture spawning and despawning locally.
 Requires CBA.
-
 Please consider creating furniture compositions for this script.
 
 Created by: Tinter
