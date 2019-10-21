@@ -1,6 +1,5 @@
 #define RANGE 100
-
-tint_range = RANGE;
+#define FREQUENCY 10
 
 call compile preprocessFileLineNumbers "furniture\import.sqf";
 
@@ -85,6 +84,6 @@ tint_activeHouses = [];
       };
     };
 
-    sleep 10;
+    sleep FREQUENCY;
   };
 };
