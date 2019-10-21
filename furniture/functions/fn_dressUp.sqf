@@ -1,6 +1,5 @@
 params["_house"];
 private _objects = [];
-private _lootSpots = [];
 
 //Blacklist check
 if (_house getVariable ["tint_house_dressed", false] || {_house getVariable ["tint_house_blacklisted", false]} || {!(alive _house)}) exitWith {};
@@ -45,35 +44,27 @@ if (_house getVariable ["tint_house_initialized", false]) then {
   for [{ private _i = count _composition - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
     _cur = _composition#_i;
     _cur params ["_type", "_relPos", "_relDir", "_relUp"];
-    if (_type == "Sign_Arrow_Direction_Cyan_F") then {
-      _lootSpots append [[_house modelToWorld _relPos, _house vectorModelToWorld _relDir, _house vectorModelToWorld _relUp]];
-      _composition deleteAt _i;
-    } else {
-      // private _obj = _type createVehicleLocal [0,0,0];
-      private _obj = createSimpleObject [_type, [0,0,0], true];
-      
-      _absDir = _house vectorModelToWorld _relDir;
-      _absUp = _house vectorModelToWorld _relUp;
-      _obj setVectorDirAndUp [_absDir, _absUp];
-      _cur set [2, _absDir];
-      _cur set [3, _absUp];
-      
-      _absPos = _house modelToWorld _relPos;
-      _obj setPosATL _absPos;
-      _cur set [1, _absPos];
-      
-      _obj enableSimulation false;
-      _objects append [_obj];
-    };
+    private _obj = createSimpleObject [_type, [0,0,0], true];
+    
+    _absDir = _house vectorModelToWorld _relDir;
+    _absUp = _house vectorModelToWorld _relUp;
+    _obj setVectorDirAndUp [_absDir, _absUp];
+    _cur set [2, _absDir];
+    _cur set [3, _absUp];
+    
+    _absPos = _house modelToWorld _relPos;
+    _obj setPosATL _absPos;
+    _cur set [1, _absPos];
+    
+    _obj enableSimulation false;
+    _objects append [_obj];
   };
   
   //Send out calculations to other computers
-  [_house, _composition, _lootSpots] remoteExecCall ["tint_fnc_updateHouse", 0];
+  [_house, _composition] remoteExecCall ["tint_fnc_updateHouse", 0];
 };
 
 
 private _eh = _house addEventHandler ["killed", {params ["_house"];[_house] call tint_fnc_dressDown;}];
 _house setVariable ["tint_house_killedEH", _eh];
 _house setVariable ["tint_house_objects", _objects];
-
-[_house] call tint_fnc_spawnLoot;
