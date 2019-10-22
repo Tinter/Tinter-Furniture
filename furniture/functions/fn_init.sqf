@@ -1,5 +1,6 @@
 #define RANGE 100
 #define FREQUENCY 10
+tint_range = RANGE;
 
 call compile preprocessFileLineNumbers "furniture\import.sqf";
 
