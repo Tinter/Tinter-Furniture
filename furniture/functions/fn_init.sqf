@@ -32,34 +32,27 @@ tint_activeHouses = [];
   params ["_validBuildings"];
   tint_houses = true;
 
-  private _pos = [];
-  private _buildings = [];
-  private _house = objNull;
   private _activeHouses = tint_activeHouses;
-  private _index = 0;
-  private _i = 0;
-  private _dressUpServer = [];
-  private _dressDownServer = [];
   while {tint_houses} do {
-    _pos = positionCameraToWorld [0,0,0];
-    _buildings = (_pos nearObjects ["House_F", RANGE]) select {!(isObjectHidden _x) && {!(_x getVariable ["tint_house_blacklisted", false])} && {alive _x}};
+    private _pos = positionCameraToWorld [0,0,0];
+    private _buildings = (_pos nearObjects ["House_F", RANGE]) select {!(isObjectHidden _x) && {!(_x getVariable ["tint_house_blacklisted", false])} && {alive _x}};
 
     //Remove all buildings not a child of the chosen classes
     {
-      _house = _x;
-      _index = _validBuildings findif {_house isKindOf _x};
+      private _house = _x;
+      private _index = _validBuildings findif {_house isKindOf _x};
       if (_index != -1) then {
         _activeHouses pushBackUnique _house;
         _house setVariable ["tint_house_class", _validBuildings#_index];
       };
     } forEach _buildings;
 
-    _dressUpServer = [];
-    _dressDownServer = [];
+    private _dressUpServer = [];
+    private _dressDownServer = [];
 
     //Inverse loop through the houses, because we need to remove some
-    for [{ _i = count _activeHouses - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
-      _house = _activeHouses#_i;
+    for [{private _i = count _activeHouses - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
+      private _house = _activeHouses#_i;
       if ((_pos distance _house) > RANGE) then {
         if (_house getVariable ["tint_house_dressed", false]) then {
           [_house] call tint_fnc_dressDown;
@@ -68,7 +61,7 @@ tint_activeHouses = [];
         };
       } else {
         if !(_house getVariable ["tint_house_dressed", false]) then {
-          [_house] call tint_fnc_dressUp;
+          [{[_this] call tint_fnc_dressUp}, _house] call CBA_fnc_waitAndExecute;
           _dressUpServer pushBack _house;
         };
       };
