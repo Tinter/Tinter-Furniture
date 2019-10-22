@@ -51,7 +51,7 @@ tint_activeHouses = [];
     private _dressDownServer = [];
 
     //Inverse loop through the houses, because we need to remove some
-    for [{private _i = count _activeHouses - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
+    for "_i" from (count _activeHouses - 1) to 0 step -1 do {
       private _house = _activeHouses#_i;
       if ((_pos distance _house) > RANGE) then {
         if (_house getVariable ["tint_house_dressed", false]) then {

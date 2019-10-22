@@ -41,7 +41,7 @@ if (_house getVariable ["tint_house_initialized", false]) then {
     } foreach _composition
   };
   
-  for [{ private _i = count _composition - 1 }, { _i >= 0 }, { _i = _i - 1 }] do {
+  for "_i" from (count _composition - 1) to 0 step -1 do {
     _cur = _composition#_i;
     _cur params ["_type", "_relPos", "_relDir", "_relUp"];
     private _obj = createSimpleObject [_type, [0,0,0], true];
