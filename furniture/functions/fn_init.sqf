@@ -25,6 +25,7 @@ if !(hasInterface) exitWith {
 };
 
 tint_activeHouses = [];
+tint_furnitureCache = [];
 
 #include "..\buildings.hpp";
 

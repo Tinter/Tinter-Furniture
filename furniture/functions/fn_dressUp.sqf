@@ -12,8 +12,7 @@ _house setVariable ["tint_house_dressed", true];
 if (_house getVariable ["tint_house_initialized", false]) then {
   {
     _x params ["_type", "_pos", "_dir", "_up"];
-    // private _obj = _type createVehicleLocal [0,0,0];
-    private _obj = createSimpleObject [_type, [0,0,0], true];
+    private _obj = [_type] call tint_fnc_addFurniture;
     _obj setVectorDirAndUp [_dir, _up];
     _obj setPosATL _pos;
     _obj enableSimulation false;
@@ -44,7 +43,7 @@ if (_house getVariable ["tint_house_initialized", false]) then {
   for "_i" from (count _composition - 1) to 0 step -1 do {
     _cur = _composition#_i;
     _cur params ["_type", "_relPos", "_relDir", "_relUp"];
-    private _obj = createSimpleObject [_type, [0,0,0], true];
+    private _obj = [_type] call tint_fnc_addFurniture;
     
     _absDir = _house vectorModelToWorld _relDir;
     _absUp = _house vectorModelToWorld _relUp;
