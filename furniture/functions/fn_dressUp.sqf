@@ -53,7 +53,9 @@ if (_house getVariable ["tint_house_initialized", false]) then {
     _cur set [3, _absUp];
     
     _absPos = _house modelToWorld _relPos;
-    _obj setPosATL _absPos;
+    _objPos = (_absPos vectorDiff (_house vectorModelToWorld (_relUp vectorMultiply (vectorMagnitude (boundingCenter _obj)))));
+    _objPos set [2, _absPos#2];
+    _obj setPosATL _objPos;
     _cur set [1, _absPos];
     
     _obj enableSimulation false;
