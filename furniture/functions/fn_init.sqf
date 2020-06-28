@@ -25,6 +25,8 @@ if !(hasInterface) exitWith {
 };
 
 tint_activeHouses = [];
+tint_dressUpHouses = [];
+tint_dressDownHouses = [];
 
 #include "..\buildings.hpp";
 
@@ -55,13 +57,13 @@ tint_activeHouses = [];
       private _house = _activeHouses#_i;
       if ((_pos distance _house) > RANGE) then {
         if (_house getVariable ["tint_house_dressed", false]) then {
-          [_house] call tint_fnc_dressDown;
+          tint_dressDownHouses pushBack _house;
           _dressDownServer pushBack _house;
           _activeHouses deleteAt _i;
         };
       } else {
         if !(_house getVariable ["tint_house_dressed", false]) then {
-          [{[_this] call tint_fnc_dressUp}, _house] call CBA_fnc_waitAndExecute;
+          tint_dressUpHouses pushBack _house;
           _dressUpServer pushBack _house;
         };
       };
@@ -79,5 +81,24 @@ tint_activeHouses = [];
     };
 
     sleep FREQUENCY;
+  };
+};
+
+
+[] spawn {
+  tint_houses = true;
+
+  while {tint_houses} do {
+    if (count tint_dressUpHouses > 0) then {
+      [tint_dressUpHouses#0] call tint_fnc_dressUp;
+      tint_dressUpHouses deleteAt 0;
+    } else {
+      if (count tint_dressDownHouses > 0) then {
+        [tint_dressDownHouses#0] call tint_fnc_dressDown;
+        tint_dressDownHouses deleteAt 0;
+      }
+    };
+    
+    sleep 0.05;
   };
 };
