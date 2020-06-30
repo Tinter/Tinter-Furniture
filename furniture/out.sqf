@@ -18,7 +18,11 @@ if (!(_newClass == "")) then {
   _objectArray append [[]];
   _cur = _objectArray select ((count _objectArray)-1);
   _cur append [typeOf _x];
-  _cur append [_house worldToModel getPosATL _x];
+  _pos = getPosWorld _x;
+  if (!(surfaceIsWater _pos)) then {
+    _pos = ASLToATL _pos;
+  };
+  _cur append [_house worldToModel _pos];
   _cur append  ([_x, _house] call BIS_fnc_vectorDirAndUpRelative);
 } foreach _objects;
 copyToClipboard str formatText ["_compositions = tint_compNamespace getVariable [""%1"", []];

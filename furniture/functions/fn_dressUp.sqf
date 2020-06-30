@@ -15,7 +15,7 @@ if (_house getVariable ["tint_house_initialized", false]) then {
     // private _obj = _type createVehicleLocal [0,0,0];
     private _obj = createSimpleObject [_type, [0,0,0], true];
     _obj setVectorDirAndUp [_dir, _up];
-    _obj setPosATL _pos;
+    _obj setPosWorld _pos;
     _obj enableSimulation false;
     _objects append [_obj];
   } forEach (_house getVariable "tint_house_composition");
@@ -52,10 +52,8 @@ if (_house getVariable ["tint_house_initialized", false]) then {
     _cur set [2, _absDir];
     _cur set [3, _absUp];
     
-    _absPos = _house modelToWorld _relPos;
-    _objPos = (_absPos vectorDiff (_house vectorModelToWorld (_relUp vectorMultiply (vectorMagnitude (boundingCenter _obj)))));
-    _objPos set [2, _absPos#2];
-    _obj setPosATL _objPos;
+    _absPos = _house modelToWorldWorld _relPos;
+    _obj setPosWorld _abspos;
     _cur set [1, _absPos];
     
     _obj enableSimulation false;
