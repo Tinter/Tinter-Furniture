@@ -3,10 +3,24 @@ _array =
 ;
 
 
+
 _house = screenToWorld getMousePosition nearestObject "House_F";
-{
-  _x params ["_type", "_pos", "_dir", "_up"];
-  _obj = create3DENEntity ["Object", _type, _house modelToWorld _pos];
-  _obj setVectorDirAndUp [_house vectorModelToWorld _dir, _house vectorModelToWorld _up];
-  _obj setPosWorld (_house modelToWorldWorld _pos);
-} foreach _array;
+collect3DENHistory {
+  {
+    _x params ["_type", "_pos", "_dir", "_up"];
+    _obj = create3DENEntity ["Object", _type, [0,0,0]];
+    _dir = _house vectorModelToWorld _dir;
+    _up = _house vectorModelToWorld _up;
+    _cross = _dir vectorCrossProduct _up;
+    _rotX = (_up#1) atan2 (_up#2);
+    _rotY = asin (_up#0);
+    _rotZ = (_dir#0) atan2 (_cross#0);
+    _rotX = [360+_rotX] call CBA_fnc_simplifyAngle;
+    _rotY = [360-_rotY] call CBA_fnc_simplifyAngle;
+    _rotZ = [360+_rotZ] call CBA_fnc_simplifyAngle;
+    
+    _obj set3DENAttribute ["Rotation", [_rotX, _rotY, _rotZ]];
+    _obj setPosWorld (_house modelToWorldWorld _pos);
+    _obj set3DENAttribute ["Position", getPosATL _obj];
+  } foreach _array;
+}
