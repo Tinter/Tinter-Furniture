@@ -8,4 +8,5 @@ tint_compNamespace = [] call CBA_fnc_createNamespace;
 #include "compositions\compositions_ravage_malden_clean.sqf"
 #include "compositions\compositions_ravage_tanoa_dirty.sqf"
 #include "compositions\compositions_ravage_tanoa_clean.sqf"
-#include "compositions\compositions_ravage_livonia.sqf"
+#include "compositions\compositions_ravage_livonia_dirty.sqf"
+#include "compositions\compositions_ravage_livonia_clean.sqf"
