@@ -5,7 +5,7 @@ Requires CBA.
 Please consider creating furniture compositions for this script.
 
 Created by: Tinter
-Scripting help by: Diwako, G4rrus, Tennessee
+Scripting help by: Diwako, G4rrus, Nigel
 Compositions by: Tinter, jonoPorter, Meanwhile(Nixie)
 
 To use: 
