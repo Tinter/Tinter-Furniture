@@ -23,3 +23,7 @@ Beware that the orientation can reset when you manipulate objects imported like 
 Composition layout:
 Compositions are just files with the output from out.sqf copy pasted inside them, these files are stored in "furniture/compositions".
 Import.sqf is in charge of including these files, both to ensure the file doesn't get too large, but also to ensure commands happen in the right order.
+
+Object variables:
+tint_house_blacklisted - Set this to ´´true´´ to exclude it from being dressed up
+tint_house_index - Set this to a nonnegative integer to force it to use a specific composition
