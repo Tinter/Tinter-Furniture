@@ -143,6 +143,7 @@ tint_offsetNamespace = [] call CBA_fnc_createNamespace;
 tint_offsetNamespace setVariable ["Land_i_Shop_01_V2_F", [0,-0.34234,0]];
 tint_offsetNamespace setVariable ["Land_u_House_Small_01_V1_F", [-0.074179,0,0.13744]];
 tint_offsetNamespace setVariable ["Land_u_House_Big_02_V1_F", [0.055465,0,0.22835]];
+tint_offsetNamespace setVariable ["Land_u_Barracks_V2_F", [-3.34136,1.03068,-2.4178]];
 
 tint_translationNamespace = [] call CBA_fnc_createNamespace;
 tint_translationNamespace setVariable ["Land_i_House_Small_01_V1_F", "i_House_Small_01_b_base_F"];
