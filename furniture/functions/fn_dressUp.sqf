@@ -34,10 +34,13 @@ if (_house getVariable ["tint_house_initialized", false]) then {
   //IMPORTANT, ARRAY IS A REFERENCE TYPE AAAAAAAAA
   private _composition = +(_compositions#_index);
   
-  //Workaround for the stupid yellow shop house
-  if (typeOf _house == "Land_i_Shop_01_V2_F") then {
+  //Offset calculation
+  _offset = tint_offsetNamespace getVariable [typeOf _house, [0,0,0]];
+  if (!(_offset isEqualTo [0,0,0])) then {
     {
-      _x#1 set [1, (_x#1#1)-0.34];
+      _x#1 set [0, (_x#1#0) + (_offset#0)];
+      _x#1 set [1, (_x#1#1) + (_offset#1)];
+      _x#1 set [2, (_x#1#2) + (_offset#2)];
     } foreach _composition
   };
   

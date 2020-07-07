@@ -1,5 +1,5 @@
-#define RANGE 100
-#define FREQUENCY 10
+#define RANGE 200
+#define FREQUENCY 20
 tint_range = RANGE;
 
 call compile preprocessFileLineNumbers "furniture\import.sqf";
@@ -29,6 +29,9 @@ tint_dressUpHouses = [];
 tint_dressDownHouses = [];
 
 #include "..\buildings.hpp";
+
+//Sleep because scheduler? Gives more immediate effect
+sleep 0.1;
 
 [_validBuildings] spawn {
   params ["_validBuildings"];
