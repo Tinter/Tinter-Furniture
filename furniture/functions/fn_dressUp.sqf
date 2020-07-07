@@ -5,14 +5,10 @@ private _objects = [];
 if (_house getVariable ["tint_house_dressed", false] || {_house getVariable ["tint_house_blacklisted", false]} || {!(alive _house)}) exitWith {};
 _house setVariable ["tint_house_dressed", true];
 
-// private _obj = "Sign_Sphere200cm_F" createVehicleLocal [0,0,0];
-// _obj setPos (_house modelToWorld [0,0,12]);
-// _house setVariable ["tint_houseobject", _obj];
-
+//If house has already been initialized, then we just load the positions
 if (_house getVariable ["tint_house_initialized", false]) then {
   {
     _x params ["_type", "_pos", "_dir", "_up"];
-    // private _obj = _type createVehicleLocal [0,0,0];
     private _obj = createSimpleObject [_type, [0,0,0], true];
     _obj setVectorDirAndUp [_dir, _up];
     _obj setPosWorld _pos;
@@ -20,21 +16,29 @@ if (_house getVariable ["tint_house_initialized", false]) then {
     _objects append [_obj];
   } forEach (_house getVariable "tint_house_composition");
 } else {
-  // _obj setObjectTexture [0, "#(argb,8,8,3)color(1,0.1,0.1,1.0,ca)"];
+//If not, then we load and calculate compositions
+  
+  //Check whether it uses a parent class
   private _class = [_house getVariable "tint_house_class"] call tint_fnc_translate;
   private _compositions = tint_compNamespace getVariable [_class, [[]]];
   
+  //Select one of the compositions to use
   private _compCount = count _compositions;
   private _index = 0;
+  
+  //If there is only one
   if (_compCount == 1) then {
     _index = 0;
   } else {
     _pos = getPos _house;
     _index = _house getVariable ["tint_house_index", -1];
     
+    
     if (_index < 0) then {
+      //Choose a random, but MP consistent index based on position and seed
       _index = (round((((_pos#1+_pos#2) * 10) + tint_seed) % _compCount) - 1) max 0;
     } else {
+      //If the composition index has been set by the mission maker, ensure it's within range
       _index = (_index % (_compCount - 1));
     };
     
@@ -52,6 +56,7 @@ if (_house getVariable ["tint_house_initialized", false]) then {
     } foreach _composition
   };
   
+  //Dress up house while saving compositions
   for "_i" from (count _composition - 1) to 0 step -1 do {
     _cur = _composition#_i;
     _cur params ["_type", "_relPos", "_relDir", "_relUp"];

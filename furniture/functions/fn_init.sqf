@@ -1,6 +1,8 @@
-#define RANGE 200
-#define FREQUENCY 20
+//Mission settings to tweak
+#define RANGE 100
+#define FREQUENCY 10
 #define SEED 42
+
 tint_range = RANGE;
 tint_seed = SEED;
 
@@ -35,6 +37,7 @@ tint_dressDownHouses = [];
 //Sleep because scheduler? Gives more immediate effect
 sleep 0.1;
 
+//Building finding loop
 [_validBuildings] spawn {
   params ["_validBuildings"];
   tint_houses = true;
@@ -89,7 +92,7 @@ sleep 0.1;
   };
 };
 
-
+//House dressing loop
 [] spawn {
   tint_houses = true;
 
@@ -104,6 +107,7 @@ sleep 0.1;
       }
     };
     
+    //Let's the scheduler sleep, hopefully avoiding any lag spikes while not having a noticeable pause
     sleep 0.05;
   };
 };
