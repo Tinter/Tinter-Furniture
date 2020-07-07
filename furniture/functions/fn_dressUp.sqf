@@ -43,6 +43,7 @@ if (_house getVariable ["tint_house_initialized", false]) then {
     };
     
   };
+  _house setVariable ["tint_house_index", _index];
   //IMPORTANT, ARRAY IS A REFERENCE TYPE AAAAAAAAA
   private _composition = +(_compositions#_index);
   
