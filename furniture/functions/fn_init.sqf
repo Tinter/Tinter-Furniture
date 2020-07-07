@@ -1,6 +1,8 @@
 #define RANGE 200
 #define FREQUENCY 20
+#define SEED 42
 tint_range = RANGE;
+tint_seed = SEED;
 
 call compile preprocessFileLineNumbers "furniture\import.sqf";
 

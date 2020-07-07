@@ -24,12 +24,20 @@ if (_house getVariable ["tint_house_initialized", false]) then {
   private _class = [_house getVariable "tint_house_class"] call tint_fnc_translate;
   private _compositions = tint_compNamespace getVariable [_class, [[]]];
   
-  private _index = count _compositions;
-  if (_index == 1) then {
+  private _compCount = count _compositions;
+  private _index = 0;
+  if (_compCount == 1) then {
     _index = 0;
   } else {
     _pos = getPos _house;
-    _index = (round(((_pos#1+_pos#2) * 10) % _index) - 1) max 0;
+    _index = _house getVariable ["tint_house_index", -1];
+    
+    if (_index < 0) then {
+      _index = (round((((_pos#1+_pos#2) * 10) + tint_seed) % _compCount) - 1) max 0;
+    } else {
+      _index = (_index % (_compCount - 1));
+    };
+    
   };
   //IMPORTANT, ARRAY IS A REFERENCE TYPE AAAAAAAAA
   private _composition = +(_compositions#_index);
