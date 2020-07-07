@@ -46,16 +46,6 @@ if (_house getVariable ["tint_house_initialized", false]) then {
   //IMPORTANT, ARRAY IS A REFERENCE TYPE AAAAAAAAA
   private _composition = +(_compositions#_index);
   
-  //Offset calculation
-  _offset = tint_offsetNamespace getVariable [typeOf _house, [0,0,0]];
-  if (!(_offset isEqualTo [0,0,0])) then {
-    {
-      _x#1 set [0, (_x#1#0) + (_offset#0)];
-      _x#1 set [1, (_x#1#1) + (_offset#1)];
-      _x#1 set [2, (_x#1#2) + (_offset#2)];
-    } foreach _composition
-  };
-  
   //Dress up house while saving compositions
   for "_i" from (count _composition - 1) to 0 step -1 do {
     _cur = _composition#_i;
@@ -68,6 +58,7 @@ if (_house getVariable ["tint_house_initialized", false]) then {
     _cur set [2, _absDir];
     _cur set [3, _absUp];
     
+    _relPos = _relPos vectorDiff (boundingCenter _house);
     _absPos = _house modelToWorldWorld _relPos;
     _obj setPosWorld _abspos;
     _cur set [1, _absPos];

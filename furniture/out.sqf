@@ -22,7 +22,9 @@ if (!(_newClass == "")) then {
   if (!(surfaceIsWater _pos)) then {
     _pos = ASLToATL _pos;
   };
-  _cur append [_house worldToModel _pos];
+  _relPos = _house worldToModel _pos;
+  _relPos = _relPos vectorAdd (boundingCenter _house);
+  _cur append [_relPos];
   _cur append  ([_x, _house] call BIS_fnc_vectorDirAndUpRelative);
 } foreach _objects;
 copyToClipboard str formatText ["_compositions = tint_compNamespace getVariable [""%1"", []];

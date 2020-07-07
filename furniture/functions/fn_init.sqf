@@ -34,7 +34,7 @@ tint_dressDownHouses = [];
 
 #include "..\buildings.hpp";
 
-//Sleep because scheduler? Gives more immediate effect
+//Sleep because scheduler? Makes furniture show up faster initially
 sleep 0.1;
 
 //Building finding loop
