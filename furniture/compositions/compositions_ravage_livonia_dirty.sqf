@@ -11,11 +11,8 @@ _compositions = tint_compNamespace getVariable ["Land_FuelStation_03_shop_F", []
 _compositions append [[["Land_CashDesk_F",[-1.10716,0.942273,0.0519135],[-0.99991,0.013414,0],[0,0,1]],["Land_Garbage_square3_F",[0.635035,-0.133655,0.103834],[0,1,0],[0,0,1]]]];
 tint_compNamespace setVariable ["Land_FuelStation_03_shop_F", _compositions];
 
-_compositions = tint_compNamespace getVariable ["Land_Caravan_01_rust_F", []];
-_compositions append [[["Land_WoodenCrate_01_stack_x3_F",[-0.0116339,2.01556,1.87219],[-0.0389385,0.999242,0],[0,0,1]]]];
-tint_compNamespace setVariable ["Land_Caravan_01_rust_F", _compositions];
-
 _compositions = tint_compNamespace getVariable ["Land_Caravan_01_green_F", []];
+_compositions append [[["Land_WoodenCrate_01_stack_x3_F",[-0.0116339,2.01556,1.87219],[-0.0389385,0.999242,0],[0,0,1]]]];
 _compositions append [[["Land_WoodenCrate_01_F",[0.0322981,2.39954,1.51251],[-0.999944,0.0105951,0],[0,0,1]]]];
 tint_compNamespace setVariable ["Land_Caravan_01_green_F", _compositions];
 
