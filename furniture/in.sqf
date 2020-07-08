@@ -18,6 +18,7 @@ collect3DENHistory {
     _rotX = [360+_rotX] call CBA_fnc_simplifyAngle;
     _rotY = [360-_rotY] call CBA_fnc_simplifyAngle;
     _rotZ = [360+_rotZ] call CBA_fnc_simplifyAngle;
+    _pos = _pos vectorDiff (boundingCenter _house);
     
     _obj set3DENAttribute ["Rotation", [_rotX, _rotY, _rotZ]];
     _obj setPosWorld (_house modelToWorldWorld _pos);
