@@ -1,7 +1,8 @@
 //Mission settings to tweak
-#define RANGE 100
+#define RANGE 300
 #define FREQUENCY 10
 #define SEED 42
+#define LIMIT 42
 
 tint_range = RANGE;
 tint_seed = SEED;
@@ -42,7 +43,7 @@ sleep 0.1;
   params ["_validBuildings"];
   tint_houses = true;
 
-  private _activeHouses = tint_activeHouses;
+  // private _activeHouses = tint_activeHouses;
   while {tint_houses} do {
     private _pos = positionCameraToWorld [0,0,0];
     private _buildings = (_pos nearObjects ["House_F", RANGE]) select {!(isObjectHidden _x) && {!(_x getVariable ["tint_house_blacklisted", false])} && {alive _x}};
@@ -52,29 +53,31 @@ sleep 0.1;
       private _house = _x;
       private _index = _validBuildings findif {_house isKindOf _x};
       if (_index != -1) then {
-        _activeHouses pushBackUnique _house;
+        tint_activeHouses pushBackUnique _house;
         _house setVariable ["tint_house_class", _validBuildings#_index];
       };
     } forEach _buildings;
-
+    tint_activeHouses = [tint_activeHouses, [_pos], {_input0 distance _x}, "ASCEND"] call BIS_fnc_sortBy;
+    
     private _dressUpServer = [];
     private _dressDownServer = [];
-
-    //Inverse loop through the houses, because we need to remove some
-    for "_i" from (count _activeHouses - 1) to 0 step -1 do {
-      private _house = _activeHouses#_i;
-      if ((_pos distance _house) > RANGE) then {
-        if (_house getVariable ["tint_house_dressed", false]) then {
-          tint_dressDownHouses pushBack _house;
-          _dressDownServer pushBack _house;
-          _activeHouses deleteAt _i;
-        };
-      } else {
-        if !(_house getVariable ["tint_house_dressed", false]) then {
-          tint_dressUpHouses pushBack _house;
-          _dressUpServer pushBack _house;
-        };
+    
+    
+    for "_i" from 0 to (LIMIT-1 min (count tint_activeHouses - 1)) do {
+      private _house = tint_activeHouses#_i;
+      if !(_house getVariable ["tint_house_dressed", false]) then {
+        tint_dressUpHouses pushBack _house;
+        _dressUpServer pushBack _house;
       };
+    };
+    
+    for "_i" from (count tint_activeHouses - 1) to (LIMIT) step -1 do {
+      private _house = tint_activeHouses#_i;
+      if (_house getVariable ["tint_house_dressed", false]) then {
+        tint_dressDownHouses pushBack _house;
+        _dressDownServer pushBack _house;
+      };
+      tint_activeHouses deleteAt _i;
     };
 
     if (isMultiplayer) then {
