@@ -74,7 +74,7 @@ sleep 0.1;
       };
     };
     
-    for "_i" from (count tint_activeHouses - 1) to (LIMIT - _outOfRange) step -1 do {
+    for "_i" from (count tint_activeHouses - 1) to ((LIMIT - _outOfRange) min (count tint_activeHouses - _outOfRange)) step -1 do {
       private _house = tint_activeHouses deleteAt _i;
       if (_house getVariable ["tint_house_dressed", false]) then {
         tint_dressDownHouses pushBack _house;
