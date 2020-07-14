@@ -43,7 +43,6 @@ sleep 0.1;
   params ["_validBuildings"];
   tint_houses = true;
 
-  // private _activeHouses = tint_activeHouses;
   while {tint_houses} do {
     private _pos = positionCameraToWorld [0,0,0];
     private _buildings = (_pos nearObjects ["House_F", RANGE]) select {!(isObjectHidden _x) && {!(_x getVariable ["tint_house_blacklisted", false])} && {alive _x}};
@@ -62,22 +61,25 @@ sleep 0.1;
     private _dressUpServer = [];
     private _dressDownServer = [];
     
-    
+    private _outOfRange = 0;
     for "_i" from 0 to (LIMIT-1 min (count tint_activeHouses - 1)) do {
       private _house = tint_activeHouses#_i;
-      if !(_house getVariable ["tint_house_dressed", false]) then {
-        tint_dressUpHouses pushBack _house;
-        _dressUpServer pushBack _house;
+      if (_pos distance _house <= RANGE) then {
+        if !(_house getVariable ["tint_house_dressed", false]) then {
+          tint_dressUpHouses pushBack _house;
+          _dressUpServer pushBack _house;
+        };
+      } else { 
+        _outOfRange = _outOfRange + 1;
       };
     };
     
-    for "_i" from (count tint_activeHouses - 1) to (LIMIT) step -1 do {
-      private _house = tint_activeHouses#_i;
+    for "_i" from (count tint_activeHouses - 1) to (LIMIT - _outOfRange) step -1 do {
+      private _house = tint_activeHouses deleteAt _i;
       if (_house getVariable ["tint_house_dressed", false]) then {
         tint_dressDownHouses pushBack _house;
         _dressDownServer pushBack _house;
       };
-      tint_activeHouses deleteAt _i;
     };
 
     if (isMultiplayer) then {
