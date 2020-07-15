@@ -36,7 +36,7 @@ if (_house getVariable ["tint_house_initialized", false]) then {
     
     if (_index < 0) then {
       //Choose a random, but MP consistent index based on position and seed
-      _index = (round((((_pos#1+_pos#2) * 10) + tint_seed) % _compCount) - 1) max 0;
+      _index = (round((((_pos#1+_pos#2) * 10) + tint_seed)) % _compCount) max 0;
     } else {
       //If the composition index has been set by the mission maker, ensure it's within range
       _index = (_index % (_compCount - 1));
