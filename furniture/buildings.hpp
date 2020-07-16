@@ -168,4 +168,4 @@ tint_translationNamespace setVariable ["Land_Barn_01_brown_F", "Land_Barn_01_gre
 tint_translationNamespace setVariable ["Land_Shed_08_brown_F", "Land_Shed_08_grey_F"];
 tint_translationNamespace setVariable ["Land_Caravan_01_rust_F", "Land_Caravan_01_green_F"];
 tint_translationNamespace setVariable ["Land_Greenhouse_01_damaged_F", "Land_Greenhouse_01_F"];
-// tint_translationNamespace setVariable ["Land_u_Addon_02_V1_F", "Land_i_Addon_02_b_white_F"];
+tint_translationNamespace setVariable ["Land_Chapel_V2_F", "Land_Chapel_V1_F"];
