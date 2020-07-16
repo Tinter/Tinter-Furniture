@@ -15,6 +15,7 @@ _validBuildings = [
   "Land_Airport_01_terminal_F",
   "Land_Airport_02_terminal_F",
   "Land_Airport_Tower_F",
+  "Land_Addon_03mid_V1_ruins_F",
   "Land_Barn_01_brown_F",
   "Land_Barn_01_brown_F",
   "Land_Barn_01_grey_F",
@@ -97,6 +98,8 @@ _validBuildings = [
   "Land_House_Small_05_F",
   "Land_House_Small_06_F",
   "Land_i_Addon_02_b_white_F",
+  "Land_i_Addon_03_V1_F",
+  "Land_i_Addon_04_V1_F",
   "Land_i_Barracks_V1_F",
   "Land_i_Garage_V1_F",
   "Land_i_House_Big_01_V1_F",
@@ -145,6 +148,7 @@ _validBuildings = [
   "Land_Supermarket_01_malden_F",
   "Land_Unfinished_Building_01_F",
   "Land_Unfinished_Building_02_F",
+  "Land_u_Addon_01_V1_F",
   "Land_u_Addon_02_V1_F",
   "Land_u_Shed_Ind_F",
   "Land_VillageStore_01_F",
@@ -164,3 +168,4 @@ tint_translationNamespace setVariable ["Land_Barn_01_brown_F", "Land_Barn_01_gre
 tint_translationNamespace setVariable ["Land_Shed_08_brown_F", "Land_Shed_08_grey_F"];
 tint_translationNamespace setVariable ["Land_Caravan_01_rust_F", "Land_Caravan_01_green_F"];
 tint_translationNamespace setVariable ["Land_Greenhouse_01_damaged_F", "Land_Greenhouse_01_F"];
+// tint_translationNamespace setVariable ["Land_u_Addon_02_V1_F", "Land_i_Addon_02_b_white_F"];
