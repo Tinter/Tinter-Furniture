@@ -56,11 +56,13 @@ sleep 0.1;
         _house setVariable ["tint_house_class", _validBuildings#_index];
       };
     } forEach _buildings;
+    //Sort list so that closest house is first
     tint_activeHouses = [tint_activeHouses, [_pos], {_input0 distance _x}, "ASCEND"] call BIS_fnc_sortBy;
     
     private _dressUpServer = [];
     private _dressDownServer = [];
     
+    //Grab [LIMIT] closest houses and check if they're within range
     private _outOfRange = 0;
     for "_i" from 0 to (LIMIT-1 min (count tint_activeHouses - 1)) do {
       private _house = tint_activeHouses#_i;
@@ -70,10 +72,12 @@ sleep 0.1;
           _dressUpServer pushBack _house;
         };
       } else { 
+        //Keep track of how many of the houses are out of range
         _outOfRange = _outOfRange + 1;
       };
     };
     
+    //Dress down the rest of the houses, but also the houses that are within the limit and out of range, based on above loop
     for "_i" from (count tint_activeHouses - 1) to ((LIMIT - _outOfRange) min (count tint_activeHouses - _outOfRange)) step -1 do {
       private _house = tint_activeHouses deleteAt _i;
       if (_house getVariable ["tint_house_dressed", false]) then {

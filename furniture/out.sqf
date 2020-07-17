@@ -18,7 +18,9 @@ if (!(_newClass == "")) then {
   _objectArray append [[]];
   _cur = _objectArray select ((count _objectArray)-1);
   _cur append [typeOf _x];
+  //Position calculation uses getPosWorld as it's the most accurate
   _pos = getPosWorld _x;
+  //Will need to be converted in case position is over water
   if (!(surfaceIsWater _pos)) then {
     _pos = ASLToATL _pos;
   };
