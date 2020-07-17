@@ -1,3 +1,4 @@
+//Order matters, first entry found is the entry used
 _validBuildings = [
   "Cargo_house_base_F",
   "Cargo_HQ_base_F",
