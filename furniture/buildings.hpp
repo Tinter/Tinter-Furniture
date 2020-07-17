@@ -140,9 +140,10 @@ _validBuildings = [
   "Land_Slum_01_F",
   "Land_Slum_02_F",
   "Land_Slum_03_F",
+  //Slum 3 must be above Slum 1 because for some reason it inherits from it
+  "Land_Slum_House03_F",
   "Land_Slum_House01_F",
   "Land_Slum_House02_F",
-  "Land_Slum_House03_F",
   "Land_SM_01_shed_F",
   "Land_SM_01_shed_unfinished_F",
   "Land_Supermarket_01_malden_F",
