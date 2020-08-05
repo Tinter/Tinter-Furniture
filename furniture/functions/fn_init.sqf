@@ -36,7 +36,10 @@ tint_dressDownHouses = [];
 #include "..\buildings.hpp";
 
 //Sleep because scheduler? Makes furniture show up faster initially
-sleep 0.1;
+//This sleep will stop missions on a dedicated server from loading, dunno why
+if (!isMultiplayer) then {
+  sleep 0.1;
+};
 
 //Building finding loop
 [_validBuildings] spawn {
