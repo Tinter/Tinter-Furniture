@@ -73,6 +73,15 @@ if (_house getVariable ["tint_house_initialized", false]) then {
 };
 
 
+private _ehd = _house addEventHandler ["dammaged", {
+    [{
+        params ["_house"];
+        if (!alive _house) then {
+            [_house] call tint_fnc_dressDown;
+        };
+    }, _this, 0.1] call cba_fnc_waitAndExecute;
+}];
+_house setVariable ["tint_house_damagedEH", _ehd];
 private _eh = _house addEventHandler ["killed", {params ["_house"];[_house] call tint_fnc_dressDown;}];
 _house setVariable ["tint_house_killedEH", _eh];
 _house setVariable ["tint_house_objects", _objects];
