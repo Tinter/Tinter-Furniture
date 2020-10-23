@@ -6,5 +6,6 @@ class tint {
     class translate {};
     class updateHouse {};
     class init {postInit=1;};
+    class preinit {preInit=1;};
   };
 };
