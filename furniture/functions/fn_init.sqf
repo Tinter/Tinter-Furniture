@@ -1,12 +1,3 @@
-//Mission settings to tweak
-#define RANGE 300
-#define FREQUENCY 10
-#define SEED 42
-#define LIMIT 42
-
-tint_range = RANGE;
-tint_seed = SEED;
-
 call compile preprocessFileLineNumbers "furniture\import.sqf";
 
 // no HC or dedicated server allowed
@@ -42,13 +33,12 @@ if (!isMultiplayer) then {
 };
 
 //Building finding loop
-[_validBuildings] spawn {
+tint_script_main = [_validBuildings] spawn {
   params ["_validBuildings"];
-  tint_houses = true;
 
   while {tint_houses} do {
     private _pos = positionCameraToWorld [0,0,0];
-    private _buildings = (_pos nearObjects ["House_F", RANGE]) select {!(isObjectHidden _x) && {!(_x getVariable ["tint_house_blacklisted", false])} && {alive _x}};
+    private _buildings = (_pos nearObjects ["House_F", tint_range]) select {!(isObjectHidden _x) && {!(_x getVariable ["tint_house_blacklisted", false])} && {alive _x}};
 
     //Remove all buildings not a child of the chosen classes
     {
@@ -65,11 +55,11 @@ if (!isMultiplayer) then {
     private _dressUpServer = [];
     private _dressDownServer = [];
     
-    //Grab [LIMIT] closest houses and check if they're within range
+    //Grab tint_houseLimit closest houses and check if they're within range
     private _outOfRange = 0;
-    for "_i" from 0 to (LIMIT-1 min (count tint_activeHouses - 1)) do {
+    for "_i" from 0 to (tint_houseLimit-1 min (count tint_activeHouses - 1)) do {
       private _house = tint_activeHouses#_i;
-      if (_pos distance _house <= RANGE) then {
+      if (_pos distance _house <= tint_range) then {
         if !(_house getVariable ["tint_house_dressed", false]) then {
           tint_dressUpHouses pushBack _house;
           _dressUpServer pushBack _house;
@@ -81,7 +71,7 @@ if (!isMultiplayer) then {
     };
     
     //Dress down the rest of the houses, but also the houses that are within the limit and out of range, based on above loop
-    for "_i" from (count tint_activeHouses - 1) to ((LIMIT - _outOfRange) min (count tint_activeHouses - _outOfRange)) step -1 do {
+    for "_i" from (count tint_activeHouses - 1) to ((tint_houseLimit - _outOfRange) min (count tint_activeHouses - _outOfRange)) step -1 do {
       private _house = tint_activeHouses deleteAt _i;
       if (_house getVariable ["tint_house_dressed", false]) then {
         tint_dressDownHouses pushBack _house;
@@ -100,14 +90,12 @@ if (!isMultiplayer) then {
       };
     };
 
-    sleep FREQUENCY;
+    sleep tint_delay;
   };
 };
 
 //House dressing loop
-[] spawn {
-  tint_houses = true;
-
+tint_script_dresser = [] spawn {
   while {tint_houses} do {
     if (count tint_dressUpHouses > 0) then {
       [tint_dressUpHouses#0] call tint_fnc_dressUp;
