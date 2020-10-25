@@ -5,7 +5,7 @@ class tint {
     class dressUp {};
     class translate {};
     class updateHouse {};
-    class init {postInit=1;};
+    class init {};
     class preinit {preInit=1;};
   };
 };
