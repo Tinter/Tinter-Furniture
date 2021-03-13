@@ -103,6 +103,66 @@ _validBuildings = [
   "Land_House_2W03_F",
   "Land_House_2W04_F",
   "Land_House_2W05_F",
+  "Land_Barn_03_large_F",
+  "Land_Barn_03_small_F",
+  "Land_Cowshed_01_A_F",
+  "Land_Cowshed_01_B_F",
+  "Land_Cowshed_01_C_F",
+  "Land_Factory_02_F",
+  "Land_GarageRow_01_small_F",
+  "Land_Sawmill_01_F",
+  "Land_ControlTower_02_F",
+  "Land_Barracks_06_F",
+  "Land_Barracks_02_F",
+  "Land_Barracks_05_F",
+  "Land_ControlTower_01_F",
+  "Land_GuardHouse_03_F",
+  "Land_GuardTower_01_F",
+  "Land_GuardTower_02_F",
+  "Land_Radar_01_antenna_base_F",
+  "Land_Radar_01_kitchen_F",
+  "Land_ServiceHangar_01_L_F",
+  "Land_ServiceHangar_01_R_F",
+  "Land_Chapel_01_F",
+  "Land_OrthodoxChurch_02_F",
+  "Land_OrthodoxChurch_03_F",
+  "Land_Church_05_F",
+  "Land_PowerStation_01_F",
+  "Land_Substation_01_F",
+  "Land_Camp_House_01_brown_F",
+  "Land_Shed_11_F",
+  "Land_Shed_13_F",
+  "Land_Shed_12_F",
+  "Land_Shed_14_F",
+  "Land_Shed_10_F",
+  "Land_Shed_09_F",
+  "Land_Workshop_05_F",
+  "Land_Workshop_03_F",
+  "Land_Workshop_04_F",
+  "Land_Workshop_02_F",
+  "Land_Workshop_01_F",
+  "Land_GuardHouse_02_F",
+  "Land_GuardBox_01_base_F",
+  "Land_Chapel_02_base_F",
+  "Land_CementWorks_01_base_F",
+  "Land_Bunker_02_double_F",
+  "Land_Bunker_02_light_double_F",
+  "Land_Bunker_02_left_F",
+  "Land_Bunker_02_light_left_F",
+  "Land_Bunker_02_right_F",
+  "Land_Bunker_02_light_right_F",
+  "Land_Church_04_lightblue_F",
+  "Land_Church_04_lightblue_damaged_F",
+  "Land_Church_04_lightyellow_F",
+  "Land_Church_04_lightyellow_damaged_F",
+  "Land_Church_04_red_F",
+  "Land_Church_04_red_damaged_F",
+  "Land_Church_04_white_red_F",
+  "Land_Church_04_white_red_damaged_F",
+  "Land_Church_04_white_F",
+  "Land_Church_04_white_damaged_F",
+  "Land_Church_04_yellow_F",
+  "Land_Church_04_yellow_damaged_F",
   "Land_House_Big_01_F",
   "Land_House_Big_02_F",
   "Land_House_Big_03_F",
@@ -319,6 +379,20 @@ tint_translationNamespace setVariable ["Land_Shed_08_brown_F", "Land_Shed_08_gre
 tint_translationNamespace setVariable ["Land_Caravan_01_rust_F", "Land_Caravan_01_green_F"];
 tint_translationNamespace setVariable ["Land_Greenhouse_01_damaged_F", "Land_Greenhouse_01_F"];
 tint_translationNamespace setVariable ["Land_Chapel_V2_F", "Land_Chapel_V1_F"];
+tint_translationNamespace setVariable ["Land_Bunker_02_light_double_F", "Land_Bunker_02_double_F"];
+tint_translationNamespace setVariable ["Land_Bunker_02_light_left_F", "Land_Bunker_02_left_F"];
+tint_translationNamespace setVariable ["Land_Bunker_02_light_right_F", "Land_Bunker_02_right_F"];
+tint_translationNamespace setVariable ["Land_Church_04_lightblue_damaged_F", "Land_Church_04_lightblue_F"];
+tint_translationNamespace setVariable ["Land_Church_04_lightyellow_F", "Land_Church_04_lightblue_F"];
+tint_translationNamespace setVariable ["Land_Church_04_lightyellow_damaged_F", "Land_Church_04_lightblue_F"];
+tint_translationNamespace setVariable ["Land_Church_04_red_F", "Land_Church_04_lightblue_F"];
+tint_translationNamespace setVariable ["Land_Church_04_red_damaged_F", "Land_Church_04_lightblue_F"];
+tint_translationNamespace setVariable ["Land_Church_04_white_red_F", "Land_Church_04_lightblue_F"];
+tint_translationNamespace setVariable ["Land_Church_04_white_red_damaged_F", "Land_Church_04_lightblue_F"];
+tint_translationNamespace setVariable ["Land_Church_04_white_F", "Land_Church_04_lightblue_F"];
+tint_translationNamespace setVariable ["Land_Church_04_white_damaged_F", "Land_Church_04_lightblue_F"];
+tint_translationNamespace setVariable ["Land_Church_04_yellow_F", "Land_Church_04_lightblue_F"];
+tint_translationNamespace setVariable ["Land_Church_04_yellow_damaged_F", "Land_Church_04_lightblue_F"];
 tint_translationNamespace setVariable ["land_gm_euro_barracks_01_win", "land_gm_euro_barracks_01"];
 tint_translationNamespace setVariable ["land_gm_euro_barracks_02_win", "land_gm_euro_barracks_02"];
 tint_translationNamespace setVariable ["land_gm_euro_church_01_win", "land_gm_euro_church_01"];
