@@ -184,6 +184,7 @@ _validBuildings = [
   "Land_i_House_Small_02_V1_F",
   "Land_i_House_Small_03_V1_F",
   "Land_i_Shed_Ind_F",
+  "Land_i_Shed_Ind_old_F",
   "Land_i_Shop_01_V1_F",
   "Land_i_Shop_02_V1_F",
   "Land_i_Stone_HouseBig_V1_F",
@@ -378,6 +379,7 @@ tint_translationNamespace setVariable ["Land_Barn_01_brown_F", "Land_Barn_01_gre
 tint_translationNamespace setVariable ["Land_Shed_08_brown_F", "Land_Shed_08_grey_F"];
 tint_translationNamespace setVariable ["Land_Caravan_01_rust_F", "Land_Caravan_01_green_F"];
 tint_translationNamespace setVariable ["Land_Greenhouse_01_damaged_F", "Land_Greenhouse_01_F"];
+tint_translationNamespace setVariable ["Land_i_Shed_Ind_old_F", "Land_i_Shed_Ind_F"];
 tint_translationNamespace setVariable ["Land_Chapel_V2_F", "Land_Chapel_V1_F"];
 tint_translationNamespace setVariable ["Land_Bunker_02_light_double_F", "Land_Bunker_02_double_F"];
 tint_translationNamespace setVariable ["Land_Bunker_02_light_left_F", "Land_Bunker_02_left_F"];
