@@ -111,6 +111,7 @@ _validBuildings = [
   "Land_Factory_02_F",
   "Land_GarageRow_01_small_F",
   "Land_Sawmill_01_F",
+  "Land_IndustrialShed_01_F",
   "Land_ControlTower_02_F",
   "Land_Barracks_06_F",
   "Land_Barracks_02_F",
