@@ -6,7 +6,7 @@ Please consider creating furniture compositions for this script.
 
 Created by: Tinter
 Scripting help by: Diwako, G4rrus, Nigel
-Compositions by: Tinter, jonoPorter, Meanwhile(Nixie)
+Compositions by: Tinter, jonoPorter, Meanwhile(Nixie), lelop
 
 To use: 
 Merge the description.ext into your mission.
