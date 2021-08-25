@@ -372,7 +372,12 @@ _validBuildings = [
   "land_gm_euro_shop_02_e",
   "land_gm_euro_shop_02_e_win",
   "land_gm_euro_shop_02_w",
-  "land_gm_euro_shop_02_w_win"
+  "land_gm_euro_shop_02_w_win",
+  //Buildings used on Rosche
+  "Land_WL_House_01_A",
+  "Land_WL_House_02_A",
+  "Land_WL_House_03_A",
+  "Land_WL_House_04_A"
 ];
 
 tint_translationNamespace = [] call CBA_fnc_createNamespace;
