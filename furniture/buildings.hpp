@@ -4,10 +4,13 @@ _validBuildings = [
   "Cargo_HQ_base_F",
   "Cargo_Tower_base_F",
   //Destroyed buildings must be above and present to prevent furniture spawning
+  "Land_i_Garage_V1_dam_F",
   "Land_i_House_Big_01_V1_dam_F",
   "Land_i_House_Big_02_V1_dam_F",
   "Land_i_House_Small_01_V1_dam_F",
   "Land_i_House_Small_02_V1_dam_F",
+  "Land_i_Shop_01_V1_dam_F",
+  "Land_i_Shop_02_V1_dam_F",
   "Land_i_Stone_HouseBig_V1_dam_F",
   "Land_i_Stone_HouseSmall_V1_dam_F",
   "Land_i_Stone_Shed_V1_dam_F",
