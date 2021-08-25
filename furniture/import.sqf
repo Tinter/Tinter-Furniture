@@ -5,7 +5,7 @@ tint_compNamespace = [] call CBA_fnc_createNamespace;
 // #include "compositions\jono_deserted.sqf"
 // #include "compositions\jono_fortified.sqf"
 #include "compositions\jono_houses.sqf"
-// #include "compositions\jono_military.sqf"
+#include "compositions\jono_military.sqf"
 #include "compositions\lived_in.sqf"
 // #include "compositions\livonia.sqf"
 #include "compositions\livonia_nonmodern.sqf"
