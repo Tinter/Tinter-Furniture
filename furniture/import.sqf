@@ -14,6 +14,8 @@ tint_compNamespace = [] call CBA_fnc_createNamespace;
 // #include "compositions\orange_postwar.sqf"
 // #include "compositions\ravage_clean.sqf"
 // #include "compositions\ravage_dirty.sqf"
+#include "compositions\vn_huts.sqf"
+// #include "compositions\vn_huts_vc.sqf"
 // #include "compositions\weferlingen_cup.sqf"
 #include "compositions\weferlingen_lived_in.sqf"
 // #include "compositions\WF_houses_cup.sqf"
