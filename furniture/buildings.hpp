@@ -541,10 +541,27 @@ _validBuildings = [
   "Land_vn_supermarket_01_f",
   "Land_vn_unfinished_building_01_f",
   "Land_vn_unfinished_building_02_f",
-  "Land_vn_wip_f"
+  "Land_vn_wip_f",
+  //WS buildings
+  "Land_A_Mosque_small_2_EP1_lxWS",
+  "Land_House_C_5_EP1_off_lxWS",
+  "Land_House_C_5_V1_EP1_off_lxWS",
+  "Land_House_C_5_V2_EP1_off_lxWS",
+  "Land_House_C_5_V3_EP1_off_lxWS",
+  "Land_House_C_11_EP1_off_lxWS",
+  "Land_House_C_12_EP1_off_lxWS",
+  "Land_House_K_1_EP1_lxWS",
+  "Land_House_K_3_EP1_lxWS",
+  "Land_House_L_1_EP1_lxWS",
+  "Land_House_L_3_EP1_lxWS",
+  "Land_House_L_7_EP1_lxWS",
+  "Land_House_L_8_EP1_lxWS",
+  "Land_House_L_9_EP1_lxWS",
+  "land_tower_lxws"
 ];
 
 tint_translationNamespace = [] call CBA_fnc_createNamespace;
+//[Looking up "A" returns "B"]
 tint_translationNamespace setVariable ["Land_i_House_Small_01_V1_F", "i_House_Small_01_b_base_F"];
 tint_translationNamespace setVariable ["i_House_Small_02_c_base_F", "i_House_Small_02_b_base_F"];
 tint_translationNamespace setVariable ["Land_i_House_Big_01_V1_F", "i_House_Big_01_b_base_F"];
@@ -754,3 +771,6 @@ tint_translationNamespace setVariable ["Land_vn_tent_mash_01_02", "Land_vn_tent_
 tint_translationNamespace setVariable ["Land_vn_tent_mash_01_04", "Land_vn_tent_mash_01_03"];
 tint_translationNamespace setVariable ["Land_vn_tent_mash_02_02", "Land_vn_tent_mash_02_01"];
 tint_translationNamespace setVariable ["Land_vn_tent_mash_02_04", "Land_vn_tent_mash_02_03"];
+tint_translationNamespace setVariable ["Land_House_C_5_V1_EP1_off_lxWS", "Land_House_C_5_EP1_off_lxWS"];
+tint_translationNamespace setVariable ["Land_House_C_5_V2_EP1_off_lxWS", "Land_House_C_5_EP1_off_lxWS"];
+tint_translationNamespace setVariable ["Land_House_C_5_V3_EP1_off_lxWS", "Land_House_C_5_EP1_off_lxWS"];
