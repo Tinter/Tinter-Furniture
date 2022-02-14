@@ -771,6 +771,3 @@ tint_translationNamespace setVariable ["Land_vn_tent_mash_01_02", "Land_vn_tent_
 tint_translationNamespace setVariable ["Land_vn_tent_mash_01_04", "Land_vn_tent_mash_01_03"];
 tint_translationNamespace setVariable ["Land_vn_tent_mash_02_02", "Land_vn_tent_mash_02_01"];
 tint_translationNamespace setVariable ["Land_vn_tent_mash_02_04", "Land_vn_tent_mash_02_03"];
-tint_translationNamespace setVariable ["Land_House_C_5_V1_EP1_off_lxWS", "Land_House_C_5_EP1_off_lxWS"];
-tint_translationNamespace setVariable ["Land_House_C_5_V2_EP1_off_lxWS", "Land_House_C_5_EP1_off_lxWS"];
-tint_translationNamespace setVariable ["Land_House_C_5_V3_EP1_off_lxWS", "Land_House_C_5_EP1_off_lxWS"];
