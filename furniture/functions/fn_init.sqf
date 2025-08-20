@@ -23,6 +23,7 @@ if !(hasInterface) exitWith {
 tint_activeHouses = [];
 tint_dressUpHouses = [];
 tint_dressDownHouses = [];
+tint_forceupdate = false;
 
 #include "..\buildings.hpp";
 
@@ -35,9 +36,18 @@ if (!isMultiplayer) then {
 //Building finding loop
 tint_script_main = [_validBuildings] spawn {
   params ["_validBuildings"];
+  private _lastPos = [-9999,-9999,-9999];
 
   while {tint_houses} do {
     private _pos = positionCameraToWorld [0,0,0];
+    if (!tint_forceupdate && {_pos distance _lastPos < tint_camradius}) then {
+        sleep tint_delay;
+        continue;
+      };
+
+    tint_forceupdate = false;
+    _lastPos = _pos;
+
     private _buildings = (_pos nearObjects ["House_F", tint_range]) select {!(isObjectHidden _x) && {!(_x getVariable ["tint_house_blacklisted", false])} && {alive _x}};
 
     //Remove all buildings not a child of the chosen classes
