@@ -8,7 +8,7 @@ Created by: Tinter
 Scripting help by: Diwako, G4rrus, Nigel
 Compositions by: Tinter, jonoPorter, Meanwhile(Nixie), lelop
 
-To use: 
+To use:
 Merge the description.ext into your mission.
 Note that current compositions are sadly limited by my creativity, I'm sorry.
 Tweak the settings in Addon Options.

@@ -1,3 +1,6 @@
+//List of valid classnames that will be considered for furniture.
+//This should be the most general classname.
+//The script checks with isKindOf, so any object inheriting from the parent classes will match.
 //Order matters, first entry found is the entry used
 _validBuildings = [
   "Cargo_house_base_F",
@@ -560,6 +563,9 @@ _validBuildings = [
   "land_tower_lxws"
 ];
 
+//For classnames that, for whateever reason, do not inherit from the base class above.
+//This translation layer allows the code to make this association when it does not exist in the config inheritance.
+//Classnames added here should also be added above, as translation happens after matching against _validBuildings.
 tint_translationNamespace = [] call CBA_fnc_createNamespace;
 //[Looking up "A" returns "B"]
 tint_translationNamespace setVariable ["Land_i_House_Small_01_V1_F", "i_House_Small_01_b_base_F"];

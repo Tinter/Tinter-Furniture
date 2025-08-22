@@ -23,6 +23,7 @@ if !(hasInterface) exitWith {
 tint_activeHouses = [];
 tint_dressUpHouses = [];
 tint_dressDownHouses = [];
+tint_forceupdate = false;
 
 #include "..\buildings.hpp";
 
@@ -35,9 +36,18 @@ if (!isMultiplayer) then {
 //Building finding loop
 tint_script_main = [_validBuildings] spawn {
   params ["_validBuildings"];
+  private _lastPos = [-9999,-9999,-9999];
 
   while {tint_houses} do {
     private _pos = positionCameraToWorld [0,0,0];
+    if (!tint_forceupdate && {_pos distance _lastPos < tint_camradius}) then {
+        sleep tint_delay;
+        continue;
+      };
+
+    tint_forceupdate = false;
+    _lastPos = _pos;
+
     private _buildings = (_pos nearObjects ["House_F", tint_range]) select {!(isObjectHidden _x) && {!(_x getVariable ["tint_house_blacklisted", false])} && {alive _x}};
 
     //Remove all buildings not a child of the chosen classes
@@ -51,10 +61,10 @@ tint_script_main = [_validBuildings] spawn {
     } forEach _buildings;
     //Sort list so that closest house is first
     tint_activeHouses = [tint_activeHouses, [_pos], {_input0 distance _x}, "ASCEND"] call BIS_fnc_sortBy;
-    
+
     private _dressUpServer = [];
     private _dressDownServer = [];
-    
+
     //Grab tint_houseLimit closest houses and check if they're within range
     private _outOfRange = 0;
     for "_i" from 0 to (tint_houseLimit-1 min (count tint_activeHouses - 1)) do {
@@ -64,12 +74,12 @@ tint_script_main = [_validBuildings] spawn {
           tint_dressUpHouses pushBack _house;
           _dressUpServer pushBack _house;
         };
-      } else { 
+      } else {
         //Keep track of how many of the houses are out of range
         _outOfRange = _outOfRange + 1;
       };
     };
-    
+
     //Dress down the rest of the houses, but also the houses that are within the limit and out of range, based on above loop
     for "_i" from (count tint_activeHouses - 1) to ((tint_houseLimit - _outOfRange) min (count tint_activeHouses - _outOfRange)) step -1 do {
       private _house = tint_activeHouses deleteAt _i;
@@ -106,7 +116,7 @@ tint_script_dresser = [] spawn {
         tint_dressDownHouses deleteAt 0;
       }
     };
-    
+
     //Let's the scheduler sleep, hopefully avoiding any lag spikes while not having a noticeable pause
     sleep 0.05;
   };
