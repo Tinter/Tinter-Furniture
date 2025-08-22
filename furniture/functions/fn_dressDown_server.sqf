@@ -7,7 +7,7 @@ private _dist = 0;
 //Loop to check the distance of the closest player
 {
   _dist = _x distance _house;
-  
+
   if (_dist < _lowestDistance) then {
     _lowestDistance = _dist;
   };

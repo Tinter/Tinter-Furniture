@@ -41,5 +41,3 @@ tint_compNamespace setVariable ["Land_vn_hut_05", _compositions];
 _compositions = tint_compNamespace getVariable ["Land_vn_hut_tower_03", []];
 _compositions append [[["Land_vn_us_common_table_01",[-1.78126,-0.665506,3.20162],[0,1,0],[0,0,1]],["Land_vn_ch_mod_c",[-1.80323,-0.465066,3.22138],[0,1,0],[0,0,1]],["Land_vn_file1_f",[-2.31544,-0.875711,3.98958],[-0.57046,0.821325,0],[0,0,1]],["Land_vn_bucket_painted_f",[-2.54933,1.43117,3.3555],[0,1,0],[0,0,1]],["Land_vn_foodsacks_01_small_brown_f",[-0.0117286,1.13357,3.43853],[0,1,0],[0,0,1]],["Land_Shovel_F",[0.429678,0.456565,3.69724],[0.200696,0.0685894,0.97725],[-0.979556,0,0.20117]],["Land_vn_radio",[-1.2046,-0.842996,4.0699],[0.673985,-0.738745,0],[0,0,1]]]];
 tint_compNamespace setVariable ["Land_vn_hut_tower_03", _compositions];
-
- 
